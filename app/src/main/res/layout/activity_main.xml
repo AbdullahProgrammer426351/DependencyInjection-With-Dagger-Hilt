@@ -5,22 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     tools:context=".MainActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="This is dependency Injection App"
         android:id="@+id/countTv"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Increment"
-        android:layout_marginTop="10dp"
-        android:id="@+id/incrementBtn"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do Operation"
-        android:layout_marginTop="10dp"
-        android:id="@+id/doOperationBtn"/>
+
 </LinearLayout>

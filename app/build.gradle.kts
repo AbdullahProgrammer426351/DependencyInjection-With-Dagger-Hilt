@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.DaggerDependencyInjection"
+    namespace = "com.example.daggerdependencyinjection"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.DaggerDependencyInjection"
+        applicationId = "com.example.daggerdependencyinjection"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
