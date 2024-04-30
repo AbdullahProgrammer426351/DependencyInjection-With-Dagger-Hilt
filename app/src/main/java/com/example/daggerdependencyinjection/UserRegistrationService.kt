@@ -1,6 +1,8 @@
 package com.example.daggerdependencyinjection
 
-class UserRegistrationService(private val userRepository: UserRepository,
+import javax.inject.Inject
+
+class UserRegistrationService @Inject constructor(private val userRepository: UserRepository,
                               private val emailService: EmailService
 ) {// this is called constructor injection.
 

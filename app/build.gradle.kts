@@ -1,6 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    // foro dagger
+    id("com.google.dagger.hilt.android")
+    id ("com.google.devtools.ksp")
+    id ("com.google.relay") version "0.3.10"
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -49,4 +54,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // dagger
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+
 }

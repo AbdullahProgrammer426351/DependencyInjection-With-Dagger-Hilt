@@ -12,8 +12,15 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val TAG = "APP_TAG"
     }
+
+    /* === Concepts for Dagger ===
+    1. Consumer: Which takes(consumes) generated code(usually objects)
+    2. Producer(Component-MB): takes instructions from consumer and generates code
+    3. Connector:Links between consumer and producer
+    * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -23,18 +30,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        /* Without injection
-        val userRegistrationService = UserRegistrationService()
-        userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")*/
-
-        // with injection (called manual dependency injection because we are handling it manually)
-        // manually doing this is a problem for big projects. To solve this, we use dagger.
-        val userRepository = UserRepository()
-        val emailService = EmailService()
-
-
-        val userRegistrationService = UserRegistrationService(userRepository, emailService)
+        val component = DaggerUserRegistrationComponent.builder().build()// to get methods created with dagger
+        val userRegistrationService = component.getUserRegistrationService()
+        // similarly for getting email service
+        val emailService = component.getEmailService()
         userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")
     }
-
 }
