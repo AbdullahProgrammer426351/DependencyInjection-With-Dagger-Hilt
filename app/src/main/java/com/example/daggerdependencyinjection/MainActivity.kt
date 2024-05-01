@@ -6,18 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.daggerdependencyinjection.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+
+    @Inject// this annotation tells dagger where to give/pass/inject the code
+    private lateinit var userRegistrationService:UserRegistrationService
     companion object{
         const val TAG = "APP_TAG"
     }
 
-    /* === Concepts for Dagger ===
-    1. Consumer: Which takes(consumes) generated code(usually objects)
-    2. Producer(Component-MB): takes instructions from consumer and generates code
-    3. Connector:Links between consumer and producer
-    * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,11 +29,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+// we will use filed injection in this part instead of constructor injection.
+        // some related detail is mentioned  @UserRegistrationComponent.kt
         val component = DaggerUserRegistrationComponent.builder().build()// to get methods created with dagger
-        val userRegistrationService = component.getUserRegistrationService()
-        // similarly for getting email service
-        val emailService = component.getEmailService()
+        component.inject(this)
         userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")
     }
 }

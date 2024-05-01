@@ -4,8 +4,8 @@ import dagger.Component
 
 @Component
 interface UserRegistrationComponent {
-    fun getUserRegistrationService():UserRegistrationService
-
-    // similarly, for getting email service
-    fun getEmailService():EmailService
+    // suppose we need 50 dependencies, then we have to create 50 functions in this class if
+    // we use our old approach
+   // instead of creating custom methods, we have another smart way to do same task like this.
+    fun inject(mainActivity: MainActivity)
 }
