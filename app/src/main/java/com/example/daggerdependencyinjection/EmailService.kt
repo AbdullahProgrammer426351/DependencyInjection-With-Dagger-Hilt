@@ -4,8 +4,7 @@ import android.util.Log
 import com.example.daggerdependencyinjection.MainActivity.Companion.TAG
 import javax.inject.Inject
 
-// Now suppose we have to send notification or message instead of email
-// when user is registered, we can do it like this.
+
 interface NotificationService {
     fun send(to: String, from: String, body: String?)
 }

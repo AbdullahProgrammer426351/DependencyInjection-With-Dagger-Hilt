@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
-    @Inject// this annotation tells dagger where to give/pass/inject the code
-    private lateinit var userRegistrationService:UserRegistrationService
+    @Inject
+    lateinit var userRegistrationService:UserRegistrationService
     companion object{
         const val TAG = "APP_TAG"
     }
@@ -29,9 +29,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-// we will use filed injection in this part instead of constructor injection.
-        // some related detail is mentioned  @UserRegistrationComponent.kt
-        val component = DaggerUserRegistrationComponent.builder().build()// to get methods created with dagger
+        val component = DaggerUserRegistrationComponent.builder().build()
         component.inject(this)
         userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")
     }
