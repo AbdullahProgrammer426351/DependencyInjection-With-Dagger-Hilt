@@ -15,10 +15,11 @@ class EmailService @Inject constructor(): NotificationService{
         Log.d(TAG, "Email Sent from $from to $to having body $body")
     }
 }
-
-class MessageService:NotificationService{
+// Suppose we have to get some code from dagger at runtime such as an object using context like room db
+// we will do that like following
+class MessageService(private val retryCount:Int):NotificationService{
     override fun send(to: String, from: String, body: String?) {
-        Log.d(TAG, "Message Sent")
+        Log.d(TAG, "Message Sent - Retry Count -- $retryCount")
     }
 
 }

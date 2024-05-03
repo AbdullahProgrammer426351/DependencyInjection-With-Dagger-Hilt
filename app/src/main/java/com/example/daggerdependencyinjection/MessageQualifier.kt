@@ -5,7 +5,7 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import javax.inject.Qualifier
 
-@Qualifier// used to make our annotation qualifier
-@Documented// this will occur in java document
-@Retention(RetentionPolicy.RUNTIME)// this decided timeline of your annotation
+@Qualifier
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
 annotation class MessageQualifier()
