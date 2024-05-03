@@ -9,7 +9,6 @@ interface NotificationService {
     fun send(to: String, from: String, body: String?)
 }
 
-// for sending notification instead of email, we will implemented it by above interface
 
 class EmailService @Inject constructor(): NotificationService{
     override fun send(to: String, from: String, body: String?) {
@@ -17,7 +16,6 @@ class EmailService @Inject constructor(): NotificationService{
     }
 }
 
-// For Message sending
 class MessageService:NotificationService{
     override fun send(to: String, from: String, body: String?) {
         Log.d(TAG, "Message Sent")
