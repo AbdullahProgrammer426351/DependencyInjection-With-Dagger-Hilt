@@ -12,6 +12,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
+    private lateinit var emailService: EmailService
+    private lateinit var emailService1: EmailService// its hashcode will be same if we use @Singleton
+/*
+But problem is when component will be created, then objects will also be recreated.
+like if we rotate our screens.  We will see in next video how can we solve this issue.
+*/
     @Inject
     lateinit var userRegistrationService:UserRegistrationService
     companion object{
@@ -28,13 +34,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        val component = DaggerUserRegistrationComponent.builder() --> If you don't use factory
-//            // for defining retry count at runtime. But if we forgot, we will face error. To
-//            // prevent that error, we have to use Factory. See userRegistrationComponent class
-//            .notificationServiceModule(NotificationServiceModule(3))
-//            .build()
-
-        // If we use factory, then we have to do like this
         val component = DaggerUserRegistrationComponent.factory().create(3)
         component.inject(this)
         userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")
