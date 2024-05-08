@@ -11,8 +11,9 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
+    @Inject
     private lateinit var emailService: EmailService
+    @Inject
     private lateinit var emailService1: EmailService// its hashcode will be same if we use @Singleton
 /*
 But problem is when component will be created, then objects will also be recreated.
