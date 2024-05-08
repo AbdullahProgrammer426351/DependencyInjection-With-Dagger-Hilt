@@ -11,14 +11,16 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    /* bad approach
+    private lateinit var emailService: EmailService
+    private lateinit var emailService1: EmailService*/
+
+    // good approach
     @Inject
     private lateinit var emailService: EmailService
     @Inject
-    private lateinit var emailService1: EmailService// its hashcode will be same if we use @Singleton
-/*
-But problem is when component will be created, then objects will also be recreated.
-like if we rotate our screens.  We will see in next video how can we solve this issue.
-*/
+    private lateinit var emailService1: EmailService
+
     @Inject
     lateinit var userRegistrationService:UserRegistrationService
     companion object{
@@ -35,7 +37,20 @@ like if we rotate our screens.  We will see in next video how can we solve this 
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        /* Bad approach
         val component = DaggerUserRegistrationComponent.factory().create(3)
+        component.inject(this)
+
+        // through this, we will get same object reference. But when component will be recreated,
+        // it will create new object. To avoid this, we can use create object on Application level scope.
+        // Every object has a scope that is same as its class where It is created. So Application is
+        // not destroyed like activity and fragment class. So, we have to do this in Application class.
+        emailService = component.getEmailService()
+        emailService1 = component.getEmailService()*/
+
+
+        // Good approach
+        val component = (application as UserApplication).userRegistrationComponent
         component.inject(this)
         userRegistrationService.registerUser("testuserforprogramming@gmail.com", "1111")
     }
